@@ -15,6 +15,7 @@ use crate::{
     BlockchainDatabase,
 };
 
+#[cfg(test)]
 const EMPTY_PRUNABLE_BLOB_HASH: [u8; 32] = [
     0xc5, 0xd2, 0x46, 0x01, 0x86, 0xf7, 0x23, 0x3c, 0x92, 0x7e, 0x7d, 0xb2, 0xdc, 0xc7, 0x03, 0xc0,
     0xe5, 0x00, 0xb6, 0x53, 0xca, 0x82, 0x27, 0x3b, 0x7b, 0xfa, 0xd8, 0x04, 0x5d, 0x85, 0xa4, 0x70,
@@ -249,12 +250,8 @@ pub fn get_tx_from_id(
 }
 
 /// Returns the prunable hash for a miner transaction.
-const fn miner_tx_prunable_hash(tx_info: &TxInfo) -> [u8; 32] {
-    if tx_info.is_v1_tx() {
-        [0; 32]
-    } else {
-        EMPTY_PRUNABLE_BLOB_HASH
-    }
+const fn miner_tx_prunable_hash(_tx_info: &TxInfo) -> [u8; 32] {
+    [0; 32]
 }
 
 /// Returns a transaction's split blobs and prunable hash from its [`TxInfo`].
